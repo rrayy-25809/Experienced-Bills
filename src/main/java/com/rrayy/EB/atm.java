@@ -11,8 +11,10 @@ public class atm implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if(sender instanceof Player) {
             
+        } else{
+            sender.sendMessage("test")
+            return true;
         }
-        return false;
     }
     
 }
