@@ -2,8 +2,10 @@ package com.rrayy.EB;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class EB extends JavaPlugin {
-    public final String PREFIX = "[EB]"
+    public final String PREFIX = ChatColor.DARK_AQUA+"§l[EB] ";
 
     @Override
     public void onEnable() {
