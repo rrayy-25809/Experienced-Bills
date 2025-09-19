@@ -28,14 +28,15 @@ public class atm implements CommandExecutor {
                 if (Experienced_pl.getLevel() < level) {
                     sender.sendMessage(plugin.PREFIX+ChatColor.RED+"본인의 레벨보다 큰 값의 경험치 지폐를 만들 수 없습니다.");
                     return false;
+                } else {
+                    bill_item item_gen = new bill_item(plugin, level);
+                    ItemStack item = item_gen.get_item();
+
+                    Experienced_pl.setLevel(Experienced_pl.getLevel() - level); // 현재 경험치에서 입력한 값 빼서 지정
+                    Experienced_pl.give(item);
+                    sender.sendMessage(plugin.PREFIX+ChatColor.GREEN+"레벨 "+ChatColor.BOLD+level+ChatColor.GREEN+"만큼을 지폐로 인출하였습니다.");
+                    return true;
                 }
-                Experienced_pl.setLevel(Experienced_pl.getLevel() - level); // 현재 경험치에서 입력한 값 빼서 지정
-
-                bill_item item_gen = new bill_item(plugin); // 경험치 없어서 어짜피 안 줄 수도 있는데 먼저 객체 생성하는 것은 메모리 낭비
-                ItemStack item = item_gen.get_item(level);
-                Experienced_pl.give(item);
-
-                return true;
             } catch (Exception e) {
                 sender.sendMessage(plugin.PREFIX+ChatColor.RED+"입력할 값은 무조건 정수이여야 합니다.");
                 return false;

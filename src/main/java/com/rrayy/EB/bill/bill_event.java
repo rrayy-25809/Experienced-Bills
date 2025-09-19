@@ -1,5 +1,8 @@
 package com.rrayy.EB.bill;
 
-public class bill_event {
+import org.bukkit.event.Listener;
+import org.bukkit.event.EventHandler;
+
+public class bill_event implements Listener {
     
 }
