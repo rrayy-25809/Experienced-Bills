@@ -21,7 +21,7 @@ public class bill_item {
     public int level;
 
     public bill_item(EB plugin, int level){
-        this.key = new NamespacedKey(plugin, "Experienced Bills");
+        this.key = new NamespacedKey(plugin, "Experienced_Bills");
         this.level = level;
     }
 
@@ -39,7 +39,7 @@ public class bill_item {
         // meta.addItemFlags(ItemFlag.HIDE_ENCHANTS); 이거 좋다
         
         PersistentDataContainer pdc = meta.getPersistentDataContainer(); // 커스텀 아이템 식별용 PersistentData
-        pdc.set(this.key, PersistentDataType.STRING, "EB "+this.level);
+        pdc.set(this.key, PersistentDataType.STRING, "EB_"+this.level);
         
         this.item.setItemMeta(meta);
         return this.item;
@@ -49,7 +49,7 @@ public class bill_item {
         PersistentDataContainer data = bill.getItemMeta().getPersistentDataContainer();
         String storedId = data.get(key, PersistentDataType.STRING);
 
-        this.level = Integer.parseInt(storedId.split(" ")[1]); // 공백 기준으로 나눈 후 뒤의 level 값만 가져옴
+        this.level = Integer.parseInt(storedId.split("_")[1]); // 언더스코어 기준으로 나눈 후 뒤의 level 값만 가져옴
     }
 
     public boolean is_bill(ItemStack item){
@@ -59,7 +59,7 @@ public class bill_item {
 
             if (data.has(key, PersistentDataType.STRING)){
                 String storedId = data.get(key, PersistentDataType.STRING);
-                return storedId.startsWith("EB ");
+                return storedId.startsWith("EB_");
             }
         }
         return false;

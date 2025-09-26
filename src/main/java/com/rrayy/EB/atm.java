@@ -12,7 +12,7 @@ import com.rrayy.EB.bill.bill_item;
 import net.md_5.bungee.api.ChatColor;
 
 public class atm implements CommandExecutor {
-    private final EB plugin;
+    private EB plugin;
 
     public atm(EB plugin){
         this.plugin = plugin;
@@ -27,9 +27,9 @@ public class atm implements CommandExecutor {
 
                 if (Experienced_pl.getLevel() < level) {
                     sender.sendMessage(plugin.PREFIX+ChatColor.RED+"본인의 레벨보다 큰 값의 경험치 지폐를 만들 수 없습니다.");
-                    return false;
+                    return true;
                 } else {
-                    bill_item item_gen = new bill_item(plugin, level);
+                    bill_item item_gen = new bill_item(this.plugin, level);
                     ItemStack item = item_gen.get_item();
 
                     Experienced_pl.setLevel(Experienced_pl.getLevel() - level); // 현재 경험치에서 입력한 값 빼서 지정
@@ -38,6 +38,7 @@ public class atm implements CommandExecutor {
                     return true;
                 }
             } catch (Exception e) {
+                this.plugin.getLogger().info(e.toString());
                 sender.sendMessage(plugin.PREFIX+ChatColor.RED+"입력할 값은 무조건 정수이여야 합니다.");
                 return false;
             }
